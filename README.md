@@ -10,7 +10,7 @@ The scoinAPI is a Python package providing fast, simplify, and to manage the rol
 * ### How do I install the package ?
     Run the following command to install:
     ```python
-    $ pip install scoinAPI
+    $ pip install SCoinAPI
     ```
 * ### What is the role of the SCoin system ?
     There are three roles which are the central bank, bank, and retailer.
@@ -20,17 +20,17 @@ The scoinAPI is a Python package providing fast, simplify, and to manage the rol
     To import the package based on the roles:
     * #### The Central Bank
     ```python
-    from scoinAPI import CentralBank
+    from SCoinAPI import CentralBank
     cb = Central_Bank()
     ```
     * #### The Bank
     ```python
-    from scoinAPI import Bank
+    from SCoinAPI import Bank
     bk = Bank()
     ```
     * #### The Retailer
     ```python
-    from scoinAPI import Retailer
+    from SCoinAPI import Retailer
     rt = Retailer()
     ```
 * ### What are the layer in SCoin system ?
