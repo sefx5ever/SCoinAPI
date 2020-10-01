@@ -1,0 +1,8 @@
+setup.py
+src/bank.py
+src/centralbank.py
+src/retailer.py
+src/SCoinAPI.egg-info/PKG-INFO
+src/SCoinAPI.egg-info/SOURCES.txt
+src/SCoinAPI.egg-info/dependency_links.txt
+src/SCoinAPI.egg-info/top_level.txt
