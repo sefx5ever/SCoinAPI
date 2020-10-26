@@ -1,6 +1,53 @@
-from bank import Bank, 
+from .bank import *
 
 class Central_Bank(Bank):
+    @print_msg
+    def send_token(self,password:str,sen:str,rev:str,
+                    num:int,method:str='1',txn:str='',
+                    description="Light token",l:str=None):
+        """
+        説明:僅適用中央銀行透過 token 之 Hash 值進行轉賬
+
+        變數:
+            layer       : str         : 設定 SCoin 體系之層級
+            password    : str         : 設定帳號密碼
+            sen         : str         : 設定發送人
+            rev         : str         : 設定收款人 
+            num         : int         : 需要轉賬數量
+            method      : str(1)      : 設定交易類別
+            description : any         : 設定交易説明
+            l           : str(None)   : 設定 IOTA API 鏈接，若需切換其它鏈接，可只針對function進行輸入
+        """
+        l = self.l if l == None else l
+        txn_token = []
+        headers = { 
+            'Content-Type' : 'application/json', 
+            'X-API-key' : password 
+        }
+
+        try:
+            data = self.return_json(
+                sen = sen,
+                rev = rev,
+                method = method,
+                description = description,
+                txn = txn 
+            )
+            for each in range(num):
+                try:
+                    res = requests.post(l + 'send_token',headers = headers,data = data)
+                    print(res.text)
+                    if res.status_code == 200:
+                        txn_token.append(res.text)
+                        msg = 'Transaction successfully!'
+                    elif res.status_code == 404: msg = 'Sendor and Receiver does not exist!'
+                    elif res.status_code == 403: msg = 'Permission deny!'
+                    else: msg = 'Function error!'
+                except: pass
+            return self.return_dict(status=True,res_data=txn_token,msg=msg)
+        except Exception as e: msg = e  
+        return self.return_dict(status=False,msg=msg)
+
     @print_msg
     def remove_layer1(self,name:str,password:str,l:str=None):
         """
@@ -93,7 +140,7 @@ class Central_Bank(Bank):
         """
         說明:獲取目前總註冊人數
         """
-        l = self.l if l == None else 
+        l = self.l if l == None else l
 
         try:
             res = requests.get(l + 'info')

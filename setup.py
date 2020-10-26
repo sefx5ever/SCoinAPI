@@ -5,7 +5,7 @@ with open('README.md','r') as fh:
 
 setup(
     name = 'SCoinAPI',
-    version = '1.0',
+    version = '1.1',
     description = "The light package for the SCU blockchain in the IOTA system.",
     py_modules = ['centralbank','bank','retailer'],
     package_dir = {'' : 'src'},

@@ -33,25 +33,24 @@ class Retailer:
             return self.return_dict(status=False,msg="Connection failed!")
 
     @print_msg
-    def send_token(self,password:str,sen:str,rev:str,
-                    num:int,layer:str,method:str='1',
-                    description="",l:str=None):
+    def send_tokens(self,password:str,sen:str,rev:str,
+                    num:int,method:str='2',description:str='',
+                    l:str=None):
         """
-        説明:透過 token 之 Hash 值進行轉賬
+        説明:透過 token 之 Hash 值進行一般轉賬
 
         變數:
-            layer       : str         : 設定 SCoin 體系之層級
             password    : str         : 設定帳號密碼
             sen         : str         : 設定發送人
             rev         : str         : 設定收款人 
             num         : int         : 需要轉賬數量
-            method      : str(1)      : 設定交易類別
-            description : any         : 設定交易説明
+            method      : str(2)      : 設定交易類別
+            description : str('')     : 設定交易説明
             l           : str(None)   : 設定 IOTA API 鏈接，若需切換其它鏈接，可只針對function進行輸入
         """
         l = self.l if l == None else l
 
-        headers = { 
+        headers = {
             'Content-Type' : 'application/json', 
             'X-API-key' : password 
         }
@@ -60,37 +59,25 @@ class Retailer:
         if sen_data['status'] == True:
             token_list = sen_data['res_data']['token']
             if (token_list[0] == '') | (sen_data['res_data']['count'] < num):
-                return self.return_dict(status=False,msg='Account sender not enough amount!')
+                return self.return_d
 
         try:
-            result = list()
-            for txn in token_list[:num]:                
-                data = self.return_json(
-                    sen = sen,
-                    rev = rev,
-                    method = layer,
-                    description = description,
-                    txn = '' if layer == '1' else txn
-                )
-            
-                res = requests.post(l + 'send_token',headers = headers,data = data)
-                if res.status_code == 200:
-                    progress_rate = (len(result)/num)*100
-                    bar_count = progress_rate//10
-                    print(f'Transfering({progress_rate}%) : {bar_count*"="}{(10-bar_count)*"*"}')
-                    result.append(self.return_dict(
-                        sen = sen,
-                        rev = rev,
-                        new_txn_hash = res.text
-                    ))
-                    continue
-                elif res.status_code == 404: msg = 'Sendor and Receiver does not exist!'
-                elif res.status_code == 403: msg = 'Permission deny!'
-                else: msg = 'Function error!'
-                return self.return_dict(status=False,res_data=result,msg=msg)
-            return self.return_dict(status=True,res_data=result,msg='Transaction complete!')
-        except Exception as e:     
-            return self.return_dict(status=False,msg=e)
+            data = self.return_json(
+                sen = sen,
+                rev = rev,
+                method = method,
+                description = description,
+                txn = token_list[:num] 
+            )
+            res = requests.post(l + 'send_tokens',headers = headers,data = data)
+            print(res.text)
+            if res.status_code == 200:
+                return self.return_dict(status=True,res_data=res.text.split('\n'),msg='Transaction complete!')
+            elif res.status_code == 404: msg = 'Sendor and Receiver does not exist!'
+            elif res.status_code == 403: msg = 'Permission deny!'
+            else: msg = 'Function error!'
+        except Exception as e: msg = e  
+        return self.return_dict(status=False,msg=msg)
 
     @print_msg
     def get_balance(self,name:str,l:str=None):
@@ -106,9 +93,8 @@ class Retailer:
         
         try:
             res = requests.get(l + 'get_balance',params=payload)
-            token = res.text
-            print(token)
             if res.status_code == 200:
+                token = res.text.split()
                 return self.return_dict(
                     status=True,
                     res_data=self.return_dict(
@@ -121,7 +107,7 @@ class Retailer:
                 )
             else: msg = 'Page not found!'
         except Exception as e: msg = e
-        return self.return_dict(status=False,msg=e)
+        return self.return_dict(status=False,msg=msg)
 
 # ========== Tool Method ===============
     def return_dict(self,**kwargs):

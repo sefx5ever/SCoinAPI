@@ -47,6 +47,7 @@ The scoinAPI is a Python package providing fast, simplify, and to manage the rol
     * [get_did](#get_did)
     * [verify_token](#verify_token)
     * [send_token](#send_token)
+    * [send_tokens](#send_tokens)
     * [remove_layer1](#remove_layer1)
     * [get_transactions_by_timestamp](#get_transactions_by_timestamp)
     * [get_user_by_timestamp](#get_user_by_timestamp)
@@ -59,14 +60,14 @@ The scoinAPI is a Python package providing fast, simplify, and to manage the rol
 
 * ### The Bank
     * [connection_test](#connection_test)
-    * [send_token](#send_token)
+    * [send_tokens](#send_token)
     * [get_balance](#get_balance)
     * [create_did](#create_did)
     * [get_did](#get_did)
     * [verify_token](#verify_token)
 * ### The Retailer
     * [connection_test](#connection_test)
-    * [send_token](#send_token)
+    * [send_tokens](#send_token)
     * [get_balance](#get_balance)
 
 ## API Reference
@@ -83,13 +84,12 @@ The scoinAPI is a Python package providing fast, simplify, and to manage the rol
         ```
 * ### send_token
     - #### Description :
-        To make transaction within two user of SCoin system.
+        To make transaction within two user of SCoin system,but it only available for layer 1 user did.
     - #### Parameters :
         - password(str) : The user's password.
         - sen(str) : The sender's username.
         - rev(str) : The receiver's username.
         - num(int) : The transaction amount.
-        - layer(str) : The SCoin system of the user's layer.
         - method(str) : Optinal,The user method, default value is light.
         - description(any) : Optional,The metadata of transaction.
         - l(str) : Optional,To set the real API link if it has been changed.
@@ -97,7 +97,24 @@ The scoinAPI is a Python package providing fast, simplify, and to manage the rol
         Dict of status, response data and message.
     - #### Usage :
         ```python
-        r = cb.send_token('SENDER_PASSWORD','SENDER','RECEIVABLE',20,'1')
+        r = cb.send_token('SENDER_PASSWORD','SENDER','RECEIVABLE',20)
+        ```
+* ### send_tokens
+    - #### Description :
+        To make transaction within two user of SCoin system,it is available for basic transaction.
+    - #### Parameters :
+        - password(str) : The user's password.
+        - sen(str) : The sender's username.
+        - rev(str) : The receiver's username.
+        - num(int) : The transaction amount.
+        - method(str) : Optinal,The user method, default value is light.
+        - description(any) : Optional,The metadata of transaction.
+        - l(str) : Optional,To set the real API link if it has been changed.
+    - #### Returns :
+        Dict of status, response data and message.
+    - #### Usage :
+        ```python
+        r = cb.send_token('SENDER_PASSWORD','SENDER','RECEIVABLE',20)
         ```
 * ### get_balance
     - #### Description :
