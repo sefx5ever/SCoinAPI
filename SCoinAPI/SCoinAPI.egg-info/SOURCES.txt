@@ -1,0 +1,10 @@
+LICENSE.txt
+MANIFEST.in
+README.md
+setup.py
+test.py
+SCoinAPI/SCoinAPI.egg-info/PKG-INFO
+SCoinAPI/SCoinAPI.egg-info/SOURCES.txt
+SCoinAPI/SCoinAPI.egg-info/dependency_links.txt
+SCoinAPI/SCoinAPI.egg-info/requires.txt
+SCoinAPI/SCoinAPI.egg-info/top_level.txt

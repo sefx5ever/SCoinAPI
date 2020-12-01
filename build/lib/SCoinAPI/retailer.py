@@ -59,7 +59,7 @@ class Retailer:
         if sen_data['status'] == True:
             token_list = sen_data['res_data']['token']
             if (token_list[0] == '') | (sen_data['res_data']['count'] < num):
-                return self.return_d
+                return self.return_dict(status=False)
 
         try:
             data = self.return_json(

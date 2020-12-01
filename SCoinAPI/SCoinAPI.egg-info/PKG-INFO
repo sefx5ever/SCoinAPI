@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
 Name: SCoinAPI
-Version: 1.1
+Version: 1.1.7
 Summary: The light package for the SCU blockchain in the IOTA system.
-Home-page: https://github.com/sefx5ever/SCoinAPI
+Home-page: https://github.com/sefx5ever/SCoinAPI.git
 Author: Wyne Tan
 Author-email: sefx5ever@gmail.com
 License: UNKNOWN
@@ -28,18 +28,18 @@ Description: # SCoinAPI Documentation
             To import the package based on the roles:
             * #### The Central Bank
             ```python
-            from SCoinAPI import CentralBank
-            cb = Central_Bank()
+            from SCoinAPI import centralbank
+            cb = centralbank.Central_Bank()
             ```
             * #### The Bank
             ```python
-            from SCoinAPI import Bank
-            bk = Bank()
+            from SCoinAPI import bank
+            bk = bank.Bank()
             ```
             * #### The Retailer
             ```python
-            from SCoinAPI import Retailer
-            rt = Retailer()
+            from SCoinAPI import retailer
+            rt = retailer.Retailer()
             ```
         * ### What are the layer in SCoin system ?
             The layer in SCoin system means that the role of user.
@@ -246,4 +246,14 @@ Description: # SCoinAPI Documentation
         * LINE  : nus_jie
         * Email : sefx5ever@gmail.com
 Platform: UNKNOWN
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
 Description-Content-Type: text/markdown

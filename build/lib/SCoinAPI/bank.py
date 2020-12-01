@@ -1,4 +1,4 @@
-from retailer import Retailer, print_msg
+from .retailer import *
 
 class Bank(Retailer):
     @print_msg

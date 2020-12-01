@@ -20,18 +20,18 @@ The scoinAPI is a Python package providing fast, simplify, and to manage the rol
     To import the package based on the roles:
     * #### The Central Bank
     ```python
-    from SCoinAPI import CentralBank
-    cb = Central_Bank()
+    from SCoinAPI import centralbank
+    cb = centralbank.Central_Bank()
     ```
     * #### The Bank
     ```python
-    from SCoinAPI import Bank
-    bk = Bank()
+    from SCoinAPI import bank
+    bk = bank.Bank()
     ```
     * #### The Retailer
     ```python
-    from SCoinAPI import Retailer
-    rt = Retailer()
+    from SCoinAPI import retailer
+    rt = retailer.Retailer()
     ```
 * ### What are the layer in SCoin system ?
     The layer in SCoin system means that the role of user.
